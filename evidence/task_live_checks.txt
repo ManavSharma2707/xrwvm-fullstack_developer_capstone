@@ -1,0 +1,27 @@
+$ live checks (Render free tier)
+
+$ curl https://dealership-sentiment-qca6.onrender.com/analyze/Fantastic%20services
+{"sentiment": "positive"}
+[HTTP 200]
+
+
+$ curl https://dealership-api-5tog.onrender.com/fetchDealers/Kansas
+[{"_id":"6ae375352928d9c4b4d9165d","id":8,"city":"Topeka","state":"Kansas","address":"288 Larry Place","zip":"66642","lat":"39.0429","long":"-95.7697","short_name":"Bytecard","full_name":"Bytecard Car Dealership","__v":0}]
+[HTTP 200]
+
+
+$ curl https://dealership-web-ffu4.onrender.com/djangoapp/reviews/dealer/29
+{"status": 200, "reviews": [{"_id": "6ae375882928d9c4b4d91698", "id": 51, "name": "Sam Student", "dealership": 29, "review": "Fantastic services, the staff were friendly and helpful", "purchase": true, "purchase_date": "2023-06-15", "car_make": "Audi", "car_model": "A5", "car_year": 2022, "user_id": 1, "time": "2026-10-29T16:34:16.533018+00:00", "__v": 0, "sentiment": "positive"}, {"_id": "6ae3753
+
+$ curl https://dealership-web-ffu4.onrender.com/about
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>About Us | Dealerships</title>
+  <link rel="stylesheet" href="/static/bootstrap.min.css">
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="stylesheet" href="/static/pages.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/di

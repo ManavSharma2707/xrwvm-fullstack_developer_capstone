@@ -2,7 +2,9 @@
 
 **GitHub repo:** https://github.com/ManavSharma2707/xrwvm-fullstack_developer_capstone
 **GitHub Actions (green, `main`):** https://github.com/ManavSharma2707/xrwvm-fullstack_developer_capstone/actions/runs/40885761159
-**Live deployment URL:** _PENDING: no host chosen yet (see "Still pending")_
+**Live deployment URL:** https://dealership-web-ffu4.onrender.com (Render free tier, first request after idle takes ~50s)
+
+Other live services: API https://dealership-api-5tog.onrender.com , sentiment https://dealership-sentiment-qca6.onrender.com
 
 Status key: PASS = run and observed working. PARTIAL = works but not in the exact setup the task asks for. PENDING = not done, needs you.
 
@@ -26,7 +28,7 @@ All screenshots in this folder were taken from a real run of the site in headles
 | 13. Admin logout | PASS | `task13_admin_logged_out.png` |
 | 14. Car makes | PASS | `task14-15_get_cars.txt` (12 makes) |
 | 15. Car models | PASS | `task14-15_get_cars.txt` (CarMake/CarModel pairs), `task15_admin_carmodels.png` |
-| 16. Sentiment analyzer | PARTIAL | `task16_sentiment_docker.txt`: `/analyze/Fantastic services` -> positive, from the Docker container (also `task16_sentiment_local.txt`). **Deployed public URL still pending.** |
+| 16. Sentiment analyzer | PASS | `task16_sentiment_docker.txt` (Docker) and `task_live_checks.txt`: live `/analyze/Fantastic services` -> positive |
 | 17. Dealers, pre-login | PASS | `task17_dealers_anonymous.png` |
 | 18. Dealers, post-login | PASS | `task18_dealers_logged_in.png` (username in navbar + Review Dealer column) |
 | 19. State filter | PASS | `task19_dealers_filtered_kansas.png` |
@@ -34,11 +36,11 @@ All screenshots in this folder were taken from a real run of the site in headles
 | 21. Add-review form | PASS | `task21_post_review_form.png` |
 | 22. Review submitted | PASS | `task22_review_submitted.png` (new review on top, positive icon) |
 | 23. GitHub Actions green | PASS | `task23_github_actions.txt` + run URL above (flake8, JSHint, frontend lint+build all green) |
-| 24. Deploy | PENDING | needs a host (see below) |
-| 25. Live landing page | PENDING | after deploy |
-| 26. Live login shows username | PENDING | after deploy (local equivalent: `task26_home_logged_in.png`) |
-| 27. Live dealer details | PENDING | after deploy (local equivalent: `task20_dealer_details.png`) |
-| 28. Live new review | PENDING | after deploy (local equivalent: `task22_review_submitted.png`) |
+| 24. Deploy | PASS | Render Blueprint (`render.yaml`), 3 services + MongoDB Atlas; `task_live_checks.txt` |
+| 25. Live landing page | PASS | `live_run/task03_about.png`, `task_live_checks.txt` (about/landing load on the live URL) |
+| 26. Live login shows username | PASS | `live_run/task26_home_logged_in.png` |
+| 27. Live dealer details | PASS | `live_run/task20_dealer_details.png` |
+| 28. Live new review | PASS | `live_run/task22_review_submitted.png` (sentiment icon positive) |
 
 ## What was verified in Docker
 
