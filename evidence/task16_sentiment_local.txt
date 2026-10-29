@@ -1,0 +1,6 @@
+$ curl localhost:5050/analyze/Fantastic%20services
+{"sentiment": "positive"}
+$ curl localhost:5050/analyze/This%20was%20terrible%20and%20awful
+{"sentiment": "negative"}
+$ curl localhost:5050/analyze/The%20car%20is%20blue
+{"sentiment": "neutral"}

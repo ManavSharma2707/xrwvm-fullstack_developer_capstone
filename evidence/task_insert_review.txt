@@ -1,0 +1,16 @@
+$ curl -X POST localhost:3030/insert_review -d '{"name":"Evidence Tester","dealership":29,"review":"Fantastic services","purchase":true,"purchase_date":"2023-05-01","car_make":"Audi","car_model":"A4","car_year":2023}'
+HTTP 200
+{
+  "id": 51,
+  "name": "Evidence Tester",
+  "dealership": 29,
+  "review": "Fantastic services",
+  "purchase": true,
+  "purchase_date": "2023-05-01",
+  "car_make": "Audi",
+  "car_model": "A4",
+  "car_year": 2023,
+  "_id": "6ae347f99e726ba5cc6d0945",
+  "__v": 0
+}
+reviews before insert: 50, after: 51

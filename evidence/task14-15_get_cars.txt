@@ -1,0 +1,149 @@
+$ curl localhost:8000/djangoapp/get_cars
+{
+    "CarModels": [
+        {
+            "CarModel": "A4",
+            "CarMake": "Audi"
+        },
+        {
+            "CarModel": "A5",
+            "CarMake": "Audi"
+        },
+        {
+            "CarModel": "A6",
+            "CarMake": "Audi"
+        },
+        {
+            "CarModel": "3 Series",
+            "CarMake": "BMW"
+        },
+        {
+            "CarModel": "5 Series",
+            "CarMake": "BMW"
+        },
+        {
+            "CarModel": "X5",
+            "CarMake": "BMW"
+        },
+        {
+            "CarModel": "Equinox",
+            "CarMake": "Chevrolet"
+        },
+        {
+            "CarModel": "Malibu",
+            "CarMake": "Chevrolet"
+        },
+        {
+            "CarModel": "Traverse",
+            "CarMake": "Chevrolet"
+        },
+        {
+            "CarModel": "Explorer",
+            "CarMake": "Ford"
+        },
+        {
+            "CarModel": "Focus",
+            "CarMake": "Ford"
+        },
+        {
+            "CarModel": "Fusion",
+            "CarMake": "Ford"
+        },
+        {
+            "CarModel": "Accord",
+            "CarMake": "Honda"
+        },
+        {
+            "CarModel": "CR-V",
+            "CarMake": "Honda"
+        },
+        {
+            "CarModel": "Civic",
+            "CarMake": "Honda"
+        },
+        {
+            "CarModel": "Elantra",
+            "CarMake": "Hyundai"
+        },
+        {
+            "CarModel": "Santa Fe",
+            "CarMake": "Hyundai"
+        },
+        {
+            "CarModel": "Tucson",
+            "CarMake": "Hyundai"
+        },
+        {
+            "CarModel": "Carnival",
+            "CarMake": "Kia"
+        },
+        {
+            "CarModel": "Cerato",
+            "CarMake": "Kia"
+        },
+        {
+            "CarModel": "Sorrento",
+            "CarMake": "Kia"
+        },
+        {
+            "CarModel": "A-Class",
+            "CarMake": "Mercedes"
+        },
+        {
+            "CarModel": "C-Class",
+            "CarMake": "Mercedes"
+        },
+        {
+            "CarModel": "E-Class",
+            "CarMake": "Mercedes"
+        },
+        {
+            "CarModel": "Pathfinder",
+            "CarMake": "NISSAN"
+        },
+        {
+            "CarModel": "Qashqai",
+            "CarMake": "NISSAN"
+        },
+        {
+            "CarModel": "XTRAIL",
+            "CarMake": "NISSAN"
+        },
+        {
+            "CarModel": "Forester",
+            "CarMake": "Subaru"
+        },
+        {
+            "CarModel": "Impreza",
+            "CarMake": "Subaru"
+        },
+        {
+            "CarModel": "Outback",
+            "CarMake": "Subaru"
+        },
+        {
+            "CarModel": "Camry",
+            "CarMake": "Toyota"
+        },
+        {
+            "CarModel": "Corolla",
+            "CarMake": "Toyota"
+        },
+        {
+            "CarModel": "RAV4",
+            "CarMake": "Toyota"
+        },
+        {
+            "CarModel": "Golf",
+            "CarMake": "Volkswagen"
+        },
+        {
+            "CarModel": "Passat",
+            "CarMake": "Volkswagen"
+        },
+        {
+            "CarModel": "Tiguan",
+            "CarMake": "Volkswagen"
+        }
+    ]
+}
