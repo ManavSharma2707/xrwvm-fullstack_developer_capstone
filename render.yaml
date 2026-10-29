@@ -1,0 +1,39 @@
+# Render Blueprint: deploys the Django app, sentiment analyzer and Express API.
+# New > Blueprint on render.com, pick this repo, and fill in the prompted secrets.
+services:
+  - type: web
+    name: dealership-sentiment
+    runtime: docker
+    plan: free
+    dockerfilePath: ./server/djangoapp/microservices/Dockerfile
+    dockerContext: ./server/djangoapp/microservices
+
+  - type: web
+    name: dealership-api
+    runtime: docker
+    plan: free
+    dockerfilePath: ./server/database/Dockerfile
+    dockerContext: ./server/database
+    envVars:
+      - key: MONGO_URL
+        sync: false   # MongoDB Atlas connection string
+
+  - type: web
+    name: dealership-web
+    runtime: docker
+    plan: free
+    dockerfilePath: ./server/Dockerfile
+    dockerContext: ./server
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: "False"
+      - key: ALLOWED_HOSTS
+        sync: false   # e.g. dealership-web.onrender.com
+      - key: CSRF_TRUSTED_ORIGINS
+        sync: false   # e.g. https://dealership-web.onrender.com
+      - key: backend_url
+        sync: false   # https://dealership-api.onrender.com
+      - key: sentiment_analyzer_url
+        sync: false   # https://dealership-sentiment.onrender.com/
