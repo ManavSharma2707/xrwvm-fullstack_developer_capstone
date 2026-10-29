@@ -131,3 +131,6 @@ dmypy.json
 # Project-specific
 /server/static/
 node_modules/
+
+# Local deployment notes (connection strings etc.) must never be committed
+*.local.txt
