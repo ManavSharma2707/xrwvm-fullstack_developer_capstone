@@ -1,0 +1,66 @@
+# Kubernetes manifests for the Django front end.
+# Replace YOUR_REGISTRY/YOUR_USER with where you pushed the image, create the
+# secret (see README), then: kubectl apply -f deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dealership
+  labels:
+    app: dealership
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dealership
+  template:
+    metadata:
+      labels:
+        app: dealership
+    spec:
+      containers:
+        - name: dealership
+          image: YOUR_REGISTRY/YOUR_USER/dealership:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8000
+          env:
+            - name: DEBUG
+              value: "False"
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: dealership-secrets
+                  key: secret-key
+            - name: ALLOWED_HOSTS
+              value: "*"
+            - name: CSRF_TRUSTED_ORIGINS
+              value: "https://YOUR_PUBLIC_HOSTNAME"
+            - name: backend_url
+              value: "https://YOUR_EXPRESS_API_URL"
+            - name: sentiment_analyzer_url
+              value: "https://YOUR_SENTIMENT_URL/"
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dealership
+spec:
+  type: LoadBalancer
+  selector:
+    app: dealership
+  ports:
+    - port: 80
+      targetPort: 8000

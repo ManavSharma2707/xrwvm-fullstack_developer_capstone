@@ -1,0 +1,58 @@
+$ curl localhost:8000/djangoapp/get_dealers/Kansas
+{
+    "status": 200,
+    "dealers": [
+        {
+            "_id": "6ae34ba97df175d4a9774a32",
+            "id": 8,
+            "city": "Topeka",
+            "state": "Kansas",
+            "address": "288 Larry Place",
+            "zip": "66642",
+            "lat": "39.0429",
+            "long": "-95.7697",
+            "short_name": "Bytecard",
+            "full_name": "Bytecard Car Dealership",
+            "__v": 0
+        }
+    ]
+}
+$ curl localhost:8000/djangoapp/dealer/3
+{
+    "status": 200,
+    "dealer": [
+        {
+            "_id": "6ae34ba97df175d4a9774a2d",
+            "id": 3,
+            "city": "Birmingham",
+            "state": "Alabama",
+            "address": "9477 Twin Pines Center",
+            "zip": "35285",
+            "lat": "33.5446",
+            "long": "-86.9292",
+            "short_name": "Sub-Ex",
+            "full_name": "Sub-Ex Car Dealership",
+            "__v": 0
+        }
+    ]
+}
+$ curl localhost:8000/djangoapp/reviews/dealer/29
+{
+    "status": 200,
+    "reviews": [
+        {
+            "_id": "6ae34ba97df175d4a97749f9",
+            "id": 3,
+            "name": "Lion Reames",
+            "dealership": 29,
+            "review": "Expanded global groupware",
+            "purchase": true,
+            "purchase_date": "10/20/2020",
+            "car_make": "Mazda",
+            "car_model": "MX-5",
+            "car_year": 2003,
+            "__v": 0,
+            "sentiment": "neutral"
+        }
+    ]
+}

@@ -1,15 +1,14 @@
-FROM node:18.12.1-bullseye-slim
+FROM node:20-bookworm-slim
 
-RUN npm install -g npm@9.1.3
+WORKDIR /app
 
-ADD package.json .
-ADD app.js .
-ADD review.js .
-ADD dealership.js .
-ADD data/dealerships.json .
-ADD data/reviews.json .
-COPY . .
-RUN npm install
+# Install dependencies first so they are cached between builds
+COPY package.json ./
+RUN npm install --omit=dev
+
+# App code, plus the seed data next to app.js
+COPY app.js review.js dealership.js inventory.js ./
+COPY data/dealerships.json data/reviews.json ./
 
 EXPOSE 3030
 

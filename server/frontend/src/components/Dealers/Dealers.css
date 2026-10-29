@@ -68,7 +68,9 @@ table{
 
 .emotion_icon {
   align-self: center;
-  position:fixed;
+  position:absolute;
+  top: 8px;
+  left: 8px;
     width:40px;
     height:40px;
     background-color:#0C9;

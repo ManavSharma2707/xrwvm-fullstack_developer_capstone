@@ -1,0 +1,7 @@
+kubectl apply --dry-run=client could not run: no Kubernetes cluster is reachable on this machine.
+Structural validation with PyYAML instead:
+ - Deployment dealership apiVersion apps/v1
+ - Service dealership apiVersion v1
+   replicas: 1 | imagePullPolicy: Always | containerPort: 8000
+   service targetPort: 8000 (selector matches deployment labels)
+OK

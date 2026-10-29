@@ -39,6 +39,13 @@ const reviews = new Schema({
     type: Number,
     required: true
   },
+  // Set by Django for reviews posted through the site (absent on seed data)
+  user_id: {
+    type: Number,
+  },
+  time: {
+    type: String,
+  },
 });
 
 module.exports = mongoose.model('reviews', reviews);
