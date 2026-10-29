@@ -47,7 +47,7 @@ const Header = () => {
       <nav className="navbar navbar-expand-lg navbar-light" style={{ backgroundColor: "darkturquoise", height: "1in" }}>
         <div className="container-fluid">
           <h2 style={{ paddingRight: "5%" }}>Dealerships</h2>
-          <div id="navbarText" style={{ display: "flex", flex: 1 }}>
+          <div className="navbar-collapse" id="navbarText">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
                 <a className="nav-link" style={{ fontSize: "larger" }} href="/">Home</a>
