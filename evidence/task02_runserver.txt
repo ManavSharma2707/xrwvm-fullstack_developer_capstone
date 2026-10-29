@@ -1,0 +1,22 @@
+$ python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, contenttypes, sessions
+Running migrations:
+  No migrations to apply.
+
+$ python manage.py check
+System check identified no issues (0 silenced).
+
+$ python manage.py runserver 8000
+[29/Oct/2026 18:28:11] "GET / HTTP/1.1" 200 2679
+GET / -> HTTP 200
+[29/Oct/2026 18:28:12] "GET /about HTTP/1.1" 200 4180
+GET /about -> HTTP 200
+[29/Oct/2026 18:28:12] "GET /contact HTTP/1.1" 200 4534
+GET /contact -> HTTP 200
+[29/Oct/2026 18:28:13] "GET /static/pages.css HTTP/1.1" 200 1443
+GET /static/pages.css -> HTTP 200
+[29/Oct/2026 18:28:13] "GET /static/avatar1.png HTTP/1.1" 200 4191
+GET /static/avatar1.png -> HTTP 200
+[29/Oct/2026 18:28:14] "GET /admin/login/ HTTP/1.1" 200 4294
+GET /admin/login/ -> HTTP 200

@@ -1,0 +1,109 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact Us | Dealerships</title>
+  <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+  <link rel="stylesheet" href="{% static 'pages.css' %}">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="page-wrap">
+  <nav class="navbar navbar-expand-lg navbar-light" style="background-color:darkturquoise; height: 1in;">
+    <div class="container-fluid">
+      <h2 style="padding-right: 5%;">Dealerships</h2>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" style="font-size: larger;" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" style="font-size: larger;" href="/about">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" style="font-size: larger;" aria-current="page" href="/contact">Contact Us</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="card" style="width: 80%; margin: auto; margin-top: 3%; overflow: hidden;">
+    <div class="page-banner">
+      <img class="banner-img" src="{% static 'car_dealership.jpg' %}" alt="Dealership forecourt">
+      <div class="banner-text">
+        <h1>Contact Us</h1>
+        <p>Questions about a dealership, a review or your account? We would love to hear from you.</p>
+      </div>
+    </div>
+
+    <div class="contact-section">
+      <div class="row" style="justify-content: space-between; align-items: center;">
+        <div style="flex: 2; min-width: 280px;">
+          <h2>Head Office</h2>
+          <dl>
+            <dt>Address</dt>
+            <dd>1200 Market Street, Suite 400<br>Kansas City, MO 64105, USA</dd>
+            <dt>Phone</dt>
+            <dd><a href="tel:+18165550142">+1 (816) 555-0142</a></dd>
+            <dt>Email</dt>
+            <dd><a href="mailto:support@dealerships.example.com">support@dealerships.example.com</a></dd>
+            <dt>Opening hours</dt>
+            <dd>Monday to Friday, 9:00 am to 6:00 pm<br>Saturday, 10:00 am to 4:00 pm<br>Sunday, closed</dd>
+          </dl>
+        </div>
+        <div style="flex: 1; min-width: 200px; text-align: center;">
+          <img class="contact-image" src="{% static 'contactus.png' %}" alt="Contact us illustration">
+        </div>
+      </div>
+
+      <h2>Regional Branches</h2>
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">Branch</th>
+              <th scope="col">Address</th>
+              <th scope="col">Phone</th>
+              <th scope="col">Email</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>East Region</td>
+              <td>88 Harbor Way, Boston, MA 02110</td>
+              <td>+1 (617) 555-0178</td>
+              <td><a href="mailto:east@dealerships.example.com">east@dealerships.example.com</a></td>
+            </tr>
+            <tr>
+              <td>South Region</td>
+              <td>410 Peachtree Plaza, Atlanta, GA 30303</td>
+              <td>+1 (404) 555-0121</td>
+              <td><a href="mailto:south@dealerships.example.com">south@dealerships.example.com</a></td>
+            </tr>
+            <tr>
+              <td>Midwest Region</td>
+              <td>1200 Market Street, Kansas City, MO 64105</td>
+              <td>+1 (816) 555-0142</td>
+              <td><a href="mailto:midwest@dealerships.example.com">midwest@dealerships.example.com</a></td>
+            </tr>
+            <tr>
+              <td>West Region</td>
+              <td>75 Pacific Avenue, San Francisco, CA 94111</td>
+              <td>+1 (415) 555-0163</td>
+              <td><a href="mailto:west@dealerships.example.com">west@dealerships.example.com</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

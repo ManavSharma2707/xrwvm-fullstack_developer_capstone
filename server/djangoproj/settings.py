@@ -13,6 +13,11 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import os
 from pathlib import Path
 
+from dotenv import load_dotenv
+
+# Load local overrides (SECRET_KEY, DEBUG, backend URLs...) from server/.env
+load_dotenv()
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,10 +31,17 @@ SECRET_KEY =\
     'django-insecure-ccow$tz_=9%dxu4(0%^(z%nx32#s@(zt9$ih@)5l54yny)wm-0'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG', 'True').lower() == 'true'
 
-ALLOWED_HOSTS = []
-CSRF_TRUSTED_ORIGINS = []
+
+def _env_list(name, default=''):
+    """Read a comma-separated environment variable into a list."""
+    return [v.strip() for v in os.getenv(name, default).split(',')
+            if v.strip()]
+
+
+ALLOWED_HOSTS = _env_list('ALLOWED_HOSTS', 'localhost,127.0.0.1')
+CSRF_TRUSTED_ORIGINS = _env_list('CSRF_TRUSTED_ORIGINS')
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [],
@@ -49,6 +61,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -61,7 +74,12 @@ ROOT_URLCONF = 'djangoproj.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        # frontend/static holds Home/About/Contact; frontend/build holds the
+        # compiled React index.html
+        'DIRS': [
+            os.path.join(BASE_DIR, 'frontend/static'),
+            os.path.join(BASE_DIR, 'frontend/build'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -116,8 +134,6 @@ TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
-USE_L10N = True
-
 USE_TZ = True
 
 
@@ -134,5 +150,12 @@ MEDIA_URL = '/media/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-STATICFILES_DIRS = []
+# In development let WhiteNoise find files without running collectstatic
+WHITENOISE_USE_FINDERS = DEBUG
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'frontend/static'),
+    os.path.join(BASE_DIR, 'frontend/build'),
+    os.path.join(BASE_DIR, 'frontend/build/static'),
+]
 
