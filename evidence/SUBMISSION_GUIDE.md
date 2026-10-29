@@ -18,15 +18,15 @@ All screenshots in this folder were taken from a real run of the site in headles
 | 5. login endpoint | PASS | `task05_login_endpoint.txt` → `{"userName": "root", "status": "Authenticated"}` (password redacted) |
 | 6. logout endpoint | PASS | `task06_logout_endpoint.txt` → `{"userName": ""}` |
 | 7. Register.jsx | PASS | `task07_register_form.png` + code `server/frontend/src/components/Register/Register.jsx` |
-| 8. `/fetchReviews/dealer/29` | PARTIAL | `task08_fetchReviews_dealer29.txt` |
-| 9. `/fetchDealers` | PARTIAL | `task09_fetchDealers.txt` |
-| 10. `/fetchDealer/3` | PARTIAL | `task10_fetchDealer3.txt` |
-| 11. `/fetchDealers/Kansas` | PARTIAL | `task11_fetchDealers_Kansas.txt` |
+| 8. `/fetchReviews/dealer/29` | PASS | `task08_fetchReviews_dealer29.txt` (run against the docker-compose stack) |
+| 9. `/fetchDealers` | PASS | `task09_fetchDealers.txt` (run against the docker-compose stack) |
+| 10. `/fetchDealer/3` | PASS | `task10_fetchDealer3.txt` (run against the docker-compose stack) |
+| 11. `/fetchDealers/Kansas` | PASS | `task11_fetchDealers_Kansas.txt` (run against the docker-compose stack) |
 | 12. Admin login | PASS | `task12_admin_login_page.png`, `task12_admin_logged_in.png`, `task12-13_admin_login_logout.txt` |
 | 13. Admin logout | PASS | `task13_admin_logged_out.png` |
 | 14. Car makes | PASS | `task14-15_get_cars.txt` (12 makes) |
 | 15. Car models | PASS | `task14-15_get_cars.txt` (CarMake/CarModel pairs), `task15_admin_carmodels.png` |
-| 16. Sentiment analyzer | PARTIAL | `task16_sentiment_local.txt`: `/analyze/Fantastic services` → positive (local). **Deployed URL pending.** |
+| 16. Sentiment analyzer | PARTIAL | `task16_sentiment_docker.txt`: `/analyze/Fantastic services` -> positive, from the Docker container (also `task16_sentiment_local.txt`). **Deployed public URL still pending.** |
 | 17. Dealers, pre-login | PASS | `task17_dealers_anonymous.png` |
 | 18. Dealers, post-login | PASS | `task18_dealers_logged_in.png` (username in navbar + Review Dealer column) |
 | 19. State filter | PASS | `task19_dealers_filtered_kansas.png` |
@@ -40,37 +40,37 @@ All screenshots in this folder were taken from a real run of the site in headles
 | 27. Live dealer details | PENDING | after deploy (local equivalent: `task20_dealer_details.png`) |
 | 28. Live new review | PENDING | after deploy (local equivalent: `task22_review_submitted.png`) |
 
-## Honest notes on the PARTIAL items
+## What was verified in Docker
 
-* **Tasks 8-11 (Express API):** the code is complete and each endpoint returns correct data, but I ran the API against an
-  **in-memory MongoDB**, not `docker-compose up`, because the Docker daemon was not running and I was not able to start Docker Desktop.
-  Once Docker is running, regenerate the evidence the way the course expects:
-  ```bash
-  cd server/database
-  docker-compose up -d --build
-  curl localhost:3030/fetchReviews/dealer/29
-  curl localhost:3030/fetchDealers
-  curl localhost:3030/fetchDealer/3
-  curl localhost:3030/fetchDealers/Kansas
-  ```
-  and screenshot those URLs in your browser if the grader asks for screenshots.
-* **Task 16:** the analyzer runs and returns the right answers locally. The task asks for a deployed URL.
-* **Docker image (`server/Dockerfile`, `entrypoint.sh`) and `server/database/Dockerfile`:** written but **never built or run** (no Docker daemon).
-  What I did verify without Docker: the same steps the entrypoint runs (`migrate`, `collectstatic`, serving the app with `DEBUG=False` and a real
-  `SECRET_KEY`) all work, and the React build succeeds in GitHub Actions. Gunicorn itself could not be run on Windows.
-* **Kubernetes:** `server/deployment.yaml` is written. `kubectl apply --dry-run=client` needs a cluster to talk to, so it could not run here;
-  I validated structure with PyYAML instead (`task_k8s_validation.txt`). Run the real dry run yourself if you have a cluster.
+Docker Desktop was started and these were built and run for real (`task_docker_containers.txt`, `docker_run/` screenshots):
 
-## Still pending (needs you)
+* `server/database`: `docker-compose up -d --build` runs the Express API + MongoDB 7.0. Tasks 8-11 evidence comes from this stack.
+* `server/Dockerfile` (Django + React, multi-stage) built and ran with `DEBUG=False`; `entrypoint.sh` ran migrate, collectstatic and gunicorn.
+* `server/djangoapp/microservices/Dockerfile` (sentiment analyzer) built and ran.
+* The full browser journey (register, login, filter, dealer page, post review, admin login/logout) passed against these containers
+  with 0 console errors: screenshots and log in `evidence/docker_run/`.
 
-1. **Start Docker Desktop**, then run the commands above, plus
-   `cd server && docker build -t dealership . && docker run -p 8000:8000 -e SECRET_KEY=<any-long-string> -e DEBUG=False -e ALLOWED_HOSTS=localhost dealership`.
-2. **Choose a deployment host** (Render, IBM Cloud Code Engine, Railway, Fly.io...). You do the login/token steps. Three things must be deployed:
+Bugs the Docker run found and fixed:
+* On this Windows machine, git checks `entrypoint.sh` out with CRLF line endings (`core.autocrlf=true`), so an image built from the working
+  tree could not start. (The blob stored in git was already LF, so builds from GitHub were not affected.) Fixed with `.gitattributes` (LF for
+  `*.sh`, Dockerfiles, YAML) plus a `sed` guard in the Dockerfile.
+* `POST /insert_review` hung when sent with `curl -d` (form content type). Fixed; invalid bodies now return HTTP 400.
+* `mongo:latest` was pinned to `mongo:7.0` for reproducibility.
+
+## Still partial / pending
+
+* **Task 16 deployed URL and Tasks 24-28:** need a hosting choice (see below).
+* **Kubernetes:** `server/deployment.yaml` is written and structurally validated (`task_k8s_validation.txt`), but `kubectl apply --dry-run=client`
+  needs a reachable cluster. Enable Kubernetes in Docker Desktop (needs several GB of disk and RAM) and run it if you want that evidence.
+
+## Still needs you
+
+1. **Choose a deployment host** (Render, IBM Cloud Code Engine, Railway, Fly.io...). You do the login/token steps. Three things must be deployed:
    * Django app (`server/`, uses `server/Dockerfile`), env vars: `SECRET_KEY`, `DEBUG=False`, `ALLOWED_HOSTS`, `CSRF_TRUSTED_ORIGINS`, `backend_url`, `sentiment_analyzer_url`
    * Sentiment analyzer (`server/djangoapp/microservices/`, has its own Dockerfile, honours `$PORT`)
    * Express API (`server/database/`) plus a hosted MongoDB (e.g. a free MongoDB Atlas cluster); set `MONGO_URL` on the API service
    After that, give me the URLs and I will verify Tasks 16 and 24-28 and take the screenshots.
-3. **Replace placeholder content** on About/Contact (team names, emails, address) with your own if you want. They are clearly fictional (`example.com`).
+2. **Replace placeholder content** on About/Contact (team names, emails, address) with your own if you want. They are clearly fictional (`example.com`).
 
 ## Things worth knowing when you explain the project
 

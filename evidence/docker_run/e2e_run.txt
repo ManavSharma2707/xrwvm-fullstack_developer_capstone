@@ -1,0 +1,18 @@
+about ok: 4 team cards
+contact ok: 4 branch rows
+contact broken images: []
+anonymous dealers rows: 50, review column: 0
+after register, home navbar: student1 Logout
+  dialog: The user with same username is already registered
+duplicate register handled (alert above)
+after login, home navbar: student1 Logout
+logged-in navbar user: student1, review icons: 50
+Kansas rows: 1 -> 8 Bytecard Car Dealership Topeka 288 Larry Place 66642 Kansas 
+All States rows: 50
+dealer 29 header: Fix San Car Dealership | San Francisco, 9 Harper Circle, Zip - 94110, California
+top review after submit: Fantastic services, the staff were friendly and helpful Sam Student Audi A5 2022 | sentiment icon: positive
+  dialog: Logging out student1...
+after logout stored username: null
+admin heading: Django administration
+admin logout page: Logged out | Django site admin
+console/page errors: 0

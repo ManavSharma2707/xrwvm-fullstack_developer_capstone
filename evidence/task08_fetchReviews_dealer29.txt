@@ -1,17 +1,18 @@
 $ curl localhost:3030/fetchReviews/dealer/29
+(run against docker-compose: containers database-api-1 + db_container, mongo:7.0)
 HTTP 200
 [
-  {
-    "_id": "6ae347f49e726ba5cc6d08d9",
-    "id": 3,
-    "name": "Lion Reames",
-    "dealership": 29,
-    "review": "Expanded global groupware",
-    "purchase": true,
-    "purchase_date": "10/20/2020",
-    "car_make": "Mazda",
-    "car_model": "MX-5",
-    "car_year": 2003,
-    "__v": 0
-  }
+    {
+        "_id": "6ae358e0919a391226f22e4d",
+        "id": 3,
+        "name": "Lion Reames",
+        "dealership": 29,
+        "review": "Expanded global groupware",
+        "purchase": true,
+        "purchase_date": "10/20/2020",
+        "car_make": "Mazda",
+        "car_model": "MX-5",
+        "car_year": 2003,
+        "__v": 0
+    }
 ]

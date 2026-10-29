@@ -1,0 +1,34 @@
+$ docker ps (all three app containers + mongo)
+NAMES                  IMAGE                STATUS          PORTS
+dealership-web         dealership           Up 49 seconds   0.0.0.0:8000->8000/tcp, [::]:8000->8000/tcp
+dealership-sentiment   sentiment-analyzer   Up 2 minutes    0.0.0.0:5050->5000/tcp, [::]:5050->5000/tcp
+database-api-1         nodeapp              Up 7 minutes    0.0.0.0:3030->3030/tcp, [::]:3030->3030/tcp
+db_container           mongo:7.0            Up 10 minutes   0.0.0.0:27017->27017/tcp, [::]:27017->27017/tcp
+
+$ docker images (project images)
+REPOSITORY:TAG                            SIZE
+dealership:latest                         285MB
+sentiment-analyzer:latest                 251MB
+nodeapp:latest                            352MB
+mongo:7.0                                 1.18GB
+
+$ docker logs dealership-web (entrypoint.sh: migrate, collectstatic, gunicorn)
+  Applying djangoapp.0001_initial... OK
+177 static files copied to '/app/static'.
+Starting Gunicorn on port 8000
+[2026-10-29 14:38:40 +0000] [1] [INFO] Listening at: http://0.0.0.0:8000 (1)
+[2026-10-29 14:38:40 +0000] [9] [INFO] Booting worker with pid: 9
+[2026-10-29 14:38:40 +0000] [10] [INFO] Booting worker with pid: 10
+
+$ curl localhost:5050/analyze/Fantastic%20services   (sentiment-analyzer container)
+{"sentiment": "positive"}
+
+$ Django container (DEBUG=False) pages:
+GET / -> HTTP 200
+GET /about -> HTTP 200
+GET /contact -> HTTP 200
+GET /login/ -> HTTP 200
+GET /dealers/ -> HTTP 200
+GET /djangoapp/get_cars -> HTTP 200
+GET /djangoapp/get_dealers/Kansas -> HTTP 200
+GET /djangoapp/reviews/dealer/29 -> HTTP 200
