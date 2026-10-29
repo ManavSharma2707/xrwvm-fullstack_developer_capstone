@@ -1,0 +1,10 @@
+**/node_modules
+**/__pycache__
+**/*.pyc
+frontend/build
+database
+djangoapp/microservices
+static
+db.sqlite3
+.env
+.git
