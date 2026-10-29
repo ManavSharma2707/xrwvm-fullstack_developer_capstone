@@ -6,8 +6,11 @@
   <link rel="stylesheet" href="static/bootstrap.min.css">
 <script>
 
-const logout = async (e) => {
-//Include the code for logout here.
+const logout = async () => {
+  // End the Django session, then forget the username kept in this tab
+  await fetch("/djangoapp/logout");
+  sessionStorage.removeItem("username");
+  window.location.href = "/";
 };
 
 let checkSession = ()=>{
