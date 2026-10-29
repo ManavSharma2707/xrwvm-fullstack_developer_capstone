@@ -1,0 +1,7 @@
+$ Admin login flow (GET /admin/login/, then POST credentials with CSRF token; password redacted)
+POST /admin/login/ -> HTTP 302 redirect=http://localhost:8000/admin/
+GET /admin/ page title: <title>Site administration | Django site admin</title>
+Logged-in banner: 
+$ Admin logout (POST /admin/logout/)
+<title>Logged out | Django site admin</title>
+GET /admin/ after logout -> HTTP 302 redirect=http://localhost:8000/admin/login/?next=/admin/
