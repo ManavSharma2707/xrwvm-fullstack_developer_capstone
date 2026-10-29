@@ -1,6 +1,13 @@
+import json
+import os
+
+import nltk
 from flask import Flask
 from nltk.sentiment import SentimentIntensityAnalyzer
-import json
+
+# The VADER lexicon ships in ./sentiment/vader_lexicon.zip; let NLTK find it
+nltk.data.path.append(os.path.dirname(os.path.abspath(__file__)))
+
 app = Flask("Sentiment Analyzer")
 
 sia = SentimentIntensityAnalyzer()
@@ -16,20 +23,17 @@ def home():
 def analyze_sentiment(input_txt):
 
     scores = sia.polarity_scores(input_txt)
-    print(scores)
     pos = float(scores['pos'])
     neg = float(scores['neg'])
     neu = float(scores['neu'])
     res = "positive"
-    print("pos neg nue ", pos, neg, neu)
     if (neg > pos and neg > neu):
         res = "negative"
     elif (neu > neg and neu > pos):
         res = "neutral"
-    res = json.dumps({"sentiment": res})
-    print(res)
-    return res
+    return app.response_class(
+        json.dumps({"sentiment": res}), mimetype='application/json')
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5050)))
