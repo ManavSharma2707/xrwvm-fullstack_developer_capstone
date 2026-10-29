@@ -17,6 +17,8 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
+# Guard against CRLF line endings from a Windows checkout
+RUN sed -i 's/\r$//' /app/entrypoint.sh
 # Compiled React app (index.html + static bundle) served by Django
 COPY --from=frontend /build/build /app/frontend/build
 

@@ -1,16 +1,17 @@
 $ curl -X POST localhost:3030/insert_review -d '{"name":"Evidence Tester","dealership":29,"review":"Fantastic services","purchase":true,"purchase_date":"2023-05-01","car_make":"Audi","car_model":"A4","car_year":2023}'
+(run against docker-compose: containers database-api-1 + db_container, mongo:7.0)
 HTTP 200
 {
-  "id": 51,
-  "name": "Evidence Tester",
-  "dealership": 29,
-  "review": "Fantastic services",
-  "purchase": true,
-  "purchase_date": "2023-05-01",
-  "car_make": "Audi",
-  "car_model": "A4",
-  "car_year": 2023,
-  "_id": "6ae347f99e726ba5cc6d0945",
-  "__v": 0
+    "id": 51,
+    "name": "Evidence Tester",
+    "dealership": 29,
+    "review": "Fantastic services",
+    "purchase": true,
+    "purchase_date": "2023-05-01",
+    "car_make": "Audi",
+    "car_model": "A4",
+    "car_year": 2023,
+    "_id": "6ae358f0919a391226f22eba",
+    "__v": 0
 }
-reviews before insert: 50, after: 51
+reviews before insert: 50, after first insert: 51

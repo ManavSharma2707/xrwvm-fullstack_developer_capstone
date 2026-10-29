@@ -7,7 +7,6 @@ const app = express();
 const port = 3030;
 
 app.use(cors());
-app.use(express.urlencoded({ extended: false }));
 
 // Seed files live next to app.js in the Docker image and in ./data locally
 function loadJson(name) {
@@ -91,7 +90,14 @@ app.get('/fetchDealer/:id', async (req, res) => {
 
 // Express route to insert review
 app.post('/insert_review', express.raw({ type: '*/*' }), async (req, res) => {
-  const data = JSON.parse(req.body);
+  // express.raw gives us the untouched body; accept it whatever the
+  // Content-Type header says (curl -d sends form-encoded by default)
+  let data;
+  try {
+    data = JSON.parse(req.body);
+  } catch (error) {
+    return res.status(400).json({ error: 'Request body must be valid JSON' });
+  }
   // New reviews get the next free id
   const documents = await Reviews.find().sort({ id: -1 });
   const new_id = documents.length > 0 ? documents[0].id + 1 : 1;

@@ -1,17 +1,18 @@
 $ curl localhost:3030/fetchDealer/3
+(run against docker-compose: containers database-api-1 + db_container, mongo:7.0)
 HTTP 200
 [
-  {
-    "_id": "6ae347f49e726ba5cc6d090d",
-    "id": 3,
-    "city": "Birmingham",
-    "state": "Alabama",
-    "address": "9477 Twin Pines Center",
-    "zip": "35285",
-    "lat": "33.5446",
-    "long": "-86.9292",
-    "short_name": "Sub-Ex",
-    "full_name": "Sub-Ex Car Dealership",
-    "__v": 0
-  }
+    {
+        "_id": "6ae358e0919a391226f22e81",
+        "id": 3,
+        "city": "Birmingham",
+        "state": "Alabama",
+        "address": "9477 Twin Pines Center",
+        "zip": "35285",
+        "lat": "33.5446",
+        "long": "-86.9292",
+        "short_name": "Sub-Ex",
+        "full_name": "Sub-Ex Car Dealership",
+        "__v": 0
+    }
 ]

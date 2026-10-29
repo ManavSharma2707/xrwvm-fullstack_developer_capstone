@@ -132,6 +132,16 @@ kubectl apply -f deployment.yaml
 
 The image's entrypoint runs `migrate`, `collectstatic`, then Gunicorn on port 8000.
 
+Run the three services locally in containers (the Express API + MongoDB come from `docker-compose`):
+
+```bash
+cd server/database && docker-compose up -d --build            # API on :3030, MongoDB 7.0
+cd ../djangoapp/microservices && docker build -t sentiment-analyzer .   && docker run -d -p 5050:5000 sentiment-analyzer             # sentiment on :5050
+cd ../.. && docker build -t dealership . && docker run -d -p 8000:8000   -e SECRET_KEY=<long-random-string> -e DEBUG=False -e ALLOWED_HOSTS=localhost   -e CSRF_TRUSTED_ORIGINS=http://localhost:8000   -e backend_url=http://host.docker.internal:3030   -e sentiment_analyzer_url=http://host.docker.internal:5050/ dealership
+```
+
+Shell scripts and Dockerfiles must keep LF line endings (enforced by `.gitattributes`).
+
 ## Deployment notes
 
 Set these environment variables on the host: `SECRET_KEY`, `DEBUG=False`,
